@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hello.itemservice.repository.mybatis.ItemMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO item(item_name, price, quantity)
+        VALUES(#{itemName}, #{prive}, #{quantity})
+    </insert>
+
+    <update id="update">
+        UPDATE item
+        SET item_name = #{updateParam.itemName}
+            price = #{updateParam.price}
+            quantity = #{updateParam.quantity}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findById" resultType="Item">
+        SELECT id, item_name, price, quantity
+        FROM item
+        WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultType="Item">
+        SELECT id, item_name, price, quantity
+        FROM item
+        <where>
+            <if test="itemName != null and itemName != ''">        <!--       <if>  조건이 맞으면 안에 있는 문구를 추가한다. -->
+               and item_name like concat('%', #{itemName}, '%')    <!--       <where> 적절하게 where문을 만들어 준다.-->
+            </if>                                                  <!--                    <if> 조건이 하나라도 맞으면 처음 나오는 and를 where로 바꾼다. -->
+            <if test="maxPrice != null">                           <!--                    <if> 조건이 모두 맞지 않으면(충족하지 않으면) where을 쓰지 않는다. -->
+               and price &lt;= #{maxPrice}
+            </if>
+        </where>
+    </select>
+
+</mapper>
