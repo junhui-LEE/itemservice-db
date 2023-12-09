@@ -108,26 +108,26 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
 //                          길이가 0인것
 //                          공백("" or " ")인것 이
 //                          하나라도 해당하면 false를 반환한다.
-            sql = sql+"where";
+            sql = sql+" where";
         }
 
         boolean andFlag = false;
         List<Object> param = new ArrayList<>();
         if(StringUtils.hasText(itemName)){
-            sql = sql+"item_name like concat('%', ?, '%')";
+            sql = sql+" item_name like concat('%', ?, '%')";
             param.add(itemName);
             andFlag = true;
         }
 
         if(maxPrice != null){
             if(andFlag){
-                sql = sql+"and";
+                sql = sql+" and";
             }
-            sql = sql+"price <= ?";
+            sql = sql+" price <= ?";
             param.add(maxPrice);
         }
 
-        log.info("sql={}", sql);
+        log.info("sql = {}", sql);
         for(int i=0; i<param.toArray().length; i++){
             System.out.print(param.toArray()[i]);
         }
