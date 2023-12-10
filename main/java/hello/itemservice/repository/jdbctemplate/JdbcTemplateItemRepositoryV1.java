@@ -136,32 +136,3 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
