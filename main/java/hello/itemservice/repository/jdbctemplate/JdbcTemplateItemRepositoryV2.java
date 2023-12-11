@@ -96,7 +96,7 @@ public class JdbcTemplateItemRepositoryV2 implements ItemRepository {
 
         SqlParameterSource param = new BeanPropertySqlParameterSource(cond);
 
-        String sql = "select id, item_name, price, quantity from item";
+        String sql = "select id, item_name as itemName, price, quantity from item";
         // 동적쿼리
         if(StringUtils.hasText(itemName) || maxPrice != null){
             sql = sql+" where";
