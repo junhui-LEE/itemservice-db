@@ -9,40 +9,50 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+//@Rollback(value = false)
+@Commit
+@Transactional
 @SpringBootTest
 class ItemRepositoryTest {
 
     @Autowired
     ItemRepository itemRepository;
 
-    @Autowired
-    PlatformTransactionManager transactionManager;
-    // dataSource와 transactionManager은 SpringBoot가 자동으로 빈으로 등록해 준다.
-    TransactionStatus status;
+//    스프링은 테스트 데이터 초기화를 위해 트랜잭션을 적용하고 롤백하는 방식을 @Transactional
+//    애노테이션 하나로 깔끔하게 해결해 준다.
+//    (@Transactional은 서비스 계층에서 트랜잭션 적용할때 쓰는 것 아니야? 맞다. 그런데 @Transactional이 테스트에서 사용되면 좀 특별하게 사용된다.)
 
-    @BeforeEach
-    void beforeEach(){
-        // 트랜잭션 시작
-        status = transactionManager.getTransaction(new DefaultTransactionDefinition());
-    }
-
+//    @Autowired
+//    PlatformTransactionManager transactionManager;
+//    // dataSource와 transactionManager은 SpringBoot가 자동으로 빈으로 등록해 준다.
+//    TransactionStatus status;
+//
+//    @BeforeEach
+//    void beforeEach(){
+//        // 트랜잭션 시작
+//        status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+//    }
     @AfterEach
     void afterEach() {
         //MemoryItemRepository 의 경우 제한적으로 사용
         if (itemRepository instanceof MemoryItemRepository) {
             ((MemoryItemRepository) itemRepository).clearStore();
         }
-        // 트랜잭션 롤백
-        transactionManager.rollback(status);
-        // ...
+//        // 트랜잭션 롤백
+//        transactionManager.rollback(status);
+//        // ...
     }
 
     @Test
