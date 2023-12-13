@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 //@Rollback(value = false)
-@Commit
+//@Commit
 @Transactional
 @SpringBootTest
 class ItemRepositoryTest {
