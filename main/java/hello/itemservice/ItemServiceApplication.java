@@ -2,6 +2,7 @@ package hello.itemservice;
 
 import hello.itemservice.config.*;
 import hello.itemservice.repository.ItemRepository;
+import hello.itemservice.repository.dynamicSQL.DynamicSQLRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +18,8 @@ import javax.sql.DataSource;
 //@Import(JdbcTemplateV1Config.class)
 //@Import(JdbcTemplateV2Config.class)
 //@Import(JdbcTemplateV3Config.class)
-@Import(MybatisConfig.class)
+//@Import(MybatisConfig.class)
+@Import(DynamicSQLConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
 
@@ -25,11 +27,13 @@ public class ItemServiceApplication {
 		SpringApplication.run(ItemServiceApplication.class, args);
 	}
 
-	@Bean
-	@Profile("local")
-	public TestDataInit testDataInit(ItemRepository itemRepository) {
-		return new TestDataInit(itemRepository);
-	}
+//	@Bean
+//	@Profile("local")
+//	public TestDataInit testDataInit(ItemRepository itemRepository) {
+//		return new TestDataInit(itemRepository);
+//	}
+
+
 /*
 	@Bean // 내가 직접 등록했고, 그러면 테스트케이스에서 dataSource를 쓸때에는 항상 내가 등록한 dataSource가 기본으로 사용된다.
 	@Profile("test")  // 테스트 수행시에는 dataSource를 직접 등록해서 쓸것이다.
