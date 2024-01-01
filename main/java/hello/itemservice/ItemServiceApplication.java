@@ -18,8 +18,8 @@ import javax.sql.DataSource;
 //@Import(JdbcTemplateV1Config.class)
 //@Import(JdbcTemplateV2Config.class)
 //@Import(JdbcTemplateV3Config.class)
-//@Import(MybatisConfig.class)
-@Import(DynamicSQLConfig.class)
+@Import(MybatisConfig.class)
+//@Import(DynamicSQLConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
 
@@ -27,11 +27,11 @@ public class ItemServiceApplication {
 		SpringApplication.run(ItemServiceApplication.class, args);
 	}
 
-//	@Bean
-//	@Profile("local")
-//	public TestDataInit testDataInit(ItemRepository itemRepository) {
-//		return new TestDataInit(itemRepository);
-//	}
+	@Bean
+	@Profile("local")
+	public TestDataInit testDataInit(ItemRepository itemRepository) {
+		return new TestDataInit(itemRepository);
+	}
 
 
 /*
