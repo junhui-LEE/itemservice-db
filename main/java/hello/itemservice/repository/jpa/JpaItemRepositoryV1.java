@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Repository
-@Transactional
+//@Repository
+//@Transactional
 public class JpaItemRepositoryV1 implements ItemRepository {
 /*
 *   @Transactional : JPA의 모든 데이터 변경(등록, 수정, 삭제)은 트랜잭션 안에서 이루어져야 한다. 조회는
@@ -110,7 +110,7 @@ public class JpaItemRepositoryV1 implements ItemRepository {
         *   상황에 따라서 다른 쿼리를 createQuery();메소드가 만들어 준다.
         * */
         // select i에서의 i는 Item엔티티 자체를 의미한다.(*도 아니고 i.item_name도 아니다 ㅋㅋ)
-        String jpql = "select i from Item i";
+        String jpql = "selectrrrrr i from Item i";
         // from Item에서 Item은 테이블명이 아니라 Item엔티티 객체명이다. // Item i에서 i는 alias이다.
         Integer maxPrice = cond.getMaxPrice();
         String itemName = cond.getItemName();
