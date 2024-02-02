@@ -1,11 +1,15 @@
 package hello.itemservice.domain;
 
 import lombok.Data;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
+@Setter
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +18,9 @@ public class Item {
     private String itemName;
     private Integer price;
     private Integer quantity;
+
+//    @OneToMany(mappedBy = "id")
+//    private List<Movie> movies = new ArrayList<>();
 
     public Item() {
     }

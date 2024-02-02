@@ -21,7 +21,9 @@ import javax.sql.DataSource;
 //@Import(MybatisConfig.class)
 //@Import(DynamicSQLConfig.class)
 //@Import(JpaConfig.class)
-@Import(SpringDataJpaConfig.class)
+//@Import(SpringDataJpaConfig.class)
+//@Import(JpqlJoinPracticeConfig.class)   // 이것은 빠르게 만든것이다. 이것을 실행할 때 @Profile("local")부분은 주석처리 했다. // 바로 아래의 컴포넌트 스캔도 주석처리 했다.
+@Import(QuerydslConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
 
