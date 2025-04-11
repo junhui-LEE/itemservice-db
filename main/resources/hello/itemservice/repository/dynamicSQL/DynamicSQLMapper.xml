@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hello.itemservice.repository.dynamicSQL.DynamicSQLMapper">
+
+    <select id="findActiveBlogWithTitleLike" resultType="Blog">
+        SELECT * FROM BLOG
+        WHERE state = 'ACTIVE'
+        <if test="title != null">
+            AND title like #{title}
+        </if>
+    </select>
+
+    <select id="findActiveBlogLike1" resultType="Blog">
+        SELECT * FROM BLOG WHERE state = 'ACTIVE'
+        <choose>
+            <when test="title != null">
+                AND title = #{title}
+            </when>
+            <when test="authorName != null">
+                AND author_name = #{authorName}
+            </when>
+            <otherwise>
+                AND featured = 1
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findActiveBlogLike2" resultType="Blog">
+        SELECT * FROM BLOG
+        WHERE
+        <if test="state != null">
+            state = #{state}
+        </if>
+        <if test="title != null">
+            AND title like #{title}
+        </if>
+        <if test="author != null and authorName != null">
+            AND author_name like #{author.name}
+        </if>
+    </select>
+
+    <select id="findActiveBlogLike3" resultType="Blog">
+        SELECT * FROM BLOG
+        <where>
+            <if test="state != null">
+                state = #{state}
+            </if>
+            <if test="title != null">
+                AND title like #{title}
+            </if>
+            <if test="authorName != null">
+                AND author_name like #{author.name}
+            </if>
+        </where>
+    </select>
+
+<!--    <select id="selectPostIn" resultType="domain.blog.Post">-->
+<!--        SELECT *-->
+<!--        FROM POST P-->
+<!--        <where>-->
+<!--            <foreach item="item" index="index" collection="list"-->
+<!--                     open="ID in (" separator="," close=")" > &#45;&#45;  nullable="true">-->
+<!--                #{item}-->
+<!--            </foreach>-->
+<!--        </where>-->
+<!--    </select>-->
+
+</mapper>

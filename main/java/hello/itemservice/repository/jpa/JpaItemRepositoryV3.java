@@ -9,11 +9,13 @@ import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
 
+
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -48,12 +50,14 @@ public class JpaItemRepositoryV3 implements ItemRepository {
     // JPAQueryFactory : JPA쿼리, 즉,jpql을 만들어주는 공장이다ㅋㅋ 그 안에 JPA인 EntityManager을 넣어주면 된다.
     // jdbctemplate에서 datasource를 넣어주는 것과 비슷하다.
 
+
     public JpaItemRepositoryV3(EntityManager em){
         this.em = em;
         this.query = new JPAQueryFactory(em);
     }
 
     @Override
+
     public Item save(Item item){
         // 저장은 이렇게 하면 된다. 이것은 JPA그냥 쓴 것이다.
         em.persist(item);
@@ -63,11 +67,11 @@ public class JpaItemRepositoryV3 implements ItemRepository {
     @Override
     public void update(Long itemId, ItemUpdateDto updateParam){
         // update는 그냥 JPA를 쓰면 된다.
+
         Item findItem = findById(itemId).orElseThrow();
         findItem.setItemName(updateParam.getItemName());
         findItem.setPrice(updateParam.getPrice());
         findItem.setQuantity(updateParam.getQuantity());
-
     }
 
     @Override
@@ -138,7 +142,5 @@ public class JpaItemRepositoryV3 implements ItemRepository {
         }
         return null;
     }
-
-
-
 }
+

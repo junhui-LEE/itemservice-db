@@ -1,6 +1,11 @@
 package hello.itemservice.domain;
 
 import lombok.Data;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -13,9 +18,13 @@ public class Item {
     private Long id;
 
     @Column(name="item_name", length=10) // 4)
+  
     private String itemName;
     private Integer price;     // 컬럼명과 데이터명이 같으면 비워두면 된다.
     private Integer quantity;  // 컬럼명과 데이터명이 같으면 비워두면 된다.
+
+//    @OneToMany(mappedBy = "id")
+//    private List<Movie> movies = new ArrayList<>();
 
     public Item() {
     }

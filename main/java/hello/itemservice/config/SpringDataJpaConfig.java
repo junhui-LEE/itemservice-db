@@ -6,6 +6,7 @@ import hello.itemservice.repository.jpa.SpringDataJpaItemRepository;
 import hello.itemservice.service.ItemService;
 import hello.itemservice.service.ItemServiceV1;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class SpringDataJpaConfig {
 
+    private final SpringDataJpaItemRepository springDataJpaItemRepository;
     private final SpringDataJpaItemRepository springDataJpaItemRepository;
 
     @Bean
@@ -24,7 +26,4 @@ public class SpringDataJpaConfig {
     public ItemRepository itemRepository(){
         return new JpaItemRepositoryV2(springDataJpaItemRepository);
     }
-
-
-
 }

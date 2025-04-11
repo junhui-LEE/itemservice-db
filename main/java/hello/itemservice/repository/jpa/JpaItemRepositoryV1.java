@@ -5,11 +5,16 @@ import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +66,7 @@ public class JpaItemRepositoryV1 implements ItemRepository {
         return Optional.ofNullable(item);
     }
 
+
     @Override
     public List<Item> findAll(ItemSearchCond cond) {
         /*
@@ -95,6 +101,7 @@ public class JpaItemRepositoryV1 implements ItemRepository {
         log.info("jpql={}", jpql);
 
         TypedQuery<Item> query = em.createQuery(jpql, Item.class);
+
         /*
         * EntityManager에서 제공하는 persist(), find()와 같이 이미 만들어진 쿼리가 아니라
         * 내가 직접 SQL쿼리를 만들려면 TypedQuery<Item> query = em.createQuery(jpql, Item.class);
@@ -102,6 +109,7 @@ public class JpaItemRepositoryV1 implements ItemRepository {
         * 지정했기 때문에 List<Item>에 바로 넘어갈 수 있다. jpql문법은 SQL과 거의 비슷한데 테이블을 대상으로
         * 하는 것이 아니라 Item엔티티를 대상으로 한다 정도로 이해하면 된다.
         * */
+      
         if(StringUtils.hasText(itemName)){
             query.setParameter("itemName", itemName);
         }
@@ -109,6 +117,5 @@ public class JpaItemRepositoryV1 implements ItemRepository {
             query.setParameter("maxPrice", maxPrice);
         }
         return query.getResultList();
-
     }
 }

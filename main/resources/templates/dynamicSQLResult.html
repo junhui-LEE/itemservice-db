@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<p> 동적 SQL을 실행시키고 난 뒤에 들어오는 ,, blog 객체 확인</p>
+<div class="container" style="max-width: 600px">
+    <tr th:each="blog : ${blogs}">
+        <td th:text="${blog.id}">blog 객체의  id 필드 </td><br>
+        <td th:text="${blog.state}">blog 객체의  state 필드 </td><br>
+        <td th:text="${blog.title}">blog 객체의  title 필드 </td><br>
+        <td th:text="${blog.authorName}">blog 객체의  authorName 필드 </td><br>
+        <td th:text="${blog.featured}">blog 객체의  featured 필드 </td><br><br>
+    </tr>
+</div>
+
+</body>
+</html>

@@ -2,6 +2,7 @@ package hello.itemservice;
 
 import hello.itemservice.config.*;
 import hello.itemservice.repository.ItemRepository;
+import hello.itemservice.repository.dynamicSQL.DynamicSQLRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,6 +34,8 @@ public class ItemServiceApplication {
 	public TestDataInit testDataInit(ItemRepository itemRepository) {
 		return new TestDataInit(itemRepository);
 	}
+
+
 /*
 	@Bean // 내가 직접 등록했고, 그러면 테스트케이스에서 dataSource를 쓸때에는 항상 내가 등록한 dataSource가 기본으로 사용된다.
 	@Profile("test")  // 테스트 수행시에는 dataSource를 직접 등록해서 쓸것이다.
